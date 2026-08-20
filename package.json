@@ -1,0 +1,67 @@
+{
+  "name": "dsh-docintel",
+  "description": "Personal document knowledge base for DeepSeek Harness: add any PDF/Markdown/text file into a local SQLite FTS5 store with page-level locators, search it with Chinese-friendly retrieval, and get page-cited answers from the agent. Web drawer included (v0.2). Zero Python, zero external services.",
+  "version": "0.2.0",
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node --test",
+    "e2e": "node scripts/e2e.mjs",
+    "test:api": "node scripts/test-api.mjs"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "LICENSE",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./store": {
+      "default": "./lib/store.js"
+    },
+    "./parser": {
+      "default": "./lib/parser.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^6.2.108"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "platform": "web"
+    }
+  },
+  "keywords": [
+    "deepseek",
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "knowledge-base",
+    "rag",
+    "pdf",
+    "fts5",
+    "docintel"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LL-cmyk-so/dsh-docintel.git"
+  }
+}

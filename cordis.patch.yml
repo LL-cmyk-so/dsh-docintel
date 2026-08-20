@@ -1,0 +1,6 @@
+# dsh-docintel bundle patch: inserts the plugin row into the profile roster.
+# The row is a bare plugin by package name: the node half (exports ".") runs in
+# the host process and registers the doc_add / doc_search / doc_status tools.
+- insert:
+    - id: docintel
+      name: 'dsh-docintel'
