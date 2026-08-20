@@ -157,6 +157,19 @@ test("chunkParas: 按预算分块、保持段落完整、定位取首段", () =>
 	assert.equal(chunks[0].body.startsWith("第1段"), true);
 });
 
+test("chunkParas: 小块合并——不产生碎片块", () => {
+	// 20 个 30 字符左右的短段：不合并会碎成 20 块
+	const paras = [];
+	for (let i = 1; i <= 20; i++) {
+		paras.push({ text: `短段${i}：一句话内容。`, para: i, section: null });
+	}
+	const chunks = chunkParas(paras, 2000);
+	assert.ok(chunks.length <= 2, `应合并成 ≤2 块，实际 ${chunks.length}`);
+	for (const c of chunks) {
+		assert.ok(c.body.length >= 200 || chunks.length === 1, `不应有碎片块（${c.body.length} 字符）`);
+	}
+});
+
 test("chunkText: 纯文本按空行分段", () => {
 	const text = "第一段内容。\n\n第二段内容。\n\n第三段内容。";
 	const chunks = chunkText(text, 10);
@@ -183,7 +196,8 @@ test("parsePlainText: 空行分段", () => {
 test("isSupportedPath", () => {
 	assert.equal(isSupportedPath("a.PDF"), true);
 	assert.equal(isSupportedPath("a.md"), true);
-	assert.equal(isSupportedPath("a.docx"), false);
+	assert.equal(isSupportedPath("a.docx"), true);
+	assert.equal(isSupportedPath("a.xlsx"), false);
 	assert.equal(isSupportedPath("a"), false);
 });
 

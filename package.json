@@ -1,7 +1,7 @@
 {
   "name": "dsh-docintel",
   "description": "Personal document knowledge base for DeepSeek Harness: add any PDF/Markdown/text file into a local SQLite FTS5 store with page-level locators, search it with Chinese-friendly retrieval, and get page-cited answers from the agent. Web drawer included (v0.2). Zero Python, zero external services.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
+    "mammoth": "^1.12.1",
     "pdfjs-dist": "^6.2.108"
   },
   "peerDependencies": {
