@@ -2,3 +2,4 @@ node_modules/
 testdata/
 .dsh-docintel/
 import-vault.mjs
+.DS_Store
