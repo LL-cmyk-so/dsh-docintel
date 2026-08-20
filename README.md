@@ -45,7 +45,7 @@ agent：→ doc_search query=现金流
 ```
 ┌──────────────────────────────────────────┐
 │ 知识库                            [×]     │
-│ [搜索：现金流、毛利率、万科……]      (搜索) │
+│ [搜索：现金流、毛利率、关键词……]  (搜索) │
 │ 找到 3 条：                                │
 │  ▸ 2025年年度报告.PDF · 第65页             │
 │     …经营现金流为负，主要系…               │
@@ -81,7 +81,7 @@ GROUP BY d.id;
 
 ## 中文检索为什么是双通道
 
-SQLite FTS5 的 trigram tokenizer 没有 1–2 字符的索引项（实测「万科」「茅台」零命中）。因此：
+SQLite FTS5 的 trigram tokenizer 没有 1–2 字符的索引项（实测两个字的词零命中）。因此：
 
 - 查询含 ≥3 字词 → FTS5 `MATCH` + `bm25()` 排序（相关度好）
 - 查询全部为 ≤2 字词 → `LIKE` 兜底（参数化 + 转义，安全）
@@ -103,7 +103,7 @@ SQLite FTS5 的 trigram tokenizer 没有 1–2 字符的索引项（实测「万
 
 ```sh
 node --test                # 17 个单元测试：解析/入库/检索/去重/更新/删除
-npm run e2e                # 真实财报 PDF 端到端（解析→入库→中文检索）
+npm run e2e                # 真实年度报告 PDF 端到端（解析→入库→中文检索）
 npm run test:api           # 面板 API 冒烟（docs/search/upload/delete，起真实 HTTP server）
 node scripts/verify-pdfjs.mjs <file.pdf>   # pdfjs 提取质量对比基准
 ```
