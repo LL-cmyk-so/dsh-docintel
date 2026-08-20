@@ -105,6 +105,16 @@ node scripts/verify-pdfjs.mjs <file.pdf>   # pdfjs 提取质量对比基准
 2. **output.schema 必须是标准 JSON Schema 子集**：属性内 `required: true` 不被支持（要用对象级 `required: [...]` 数组）；`type` 只接受单字符串（不支持 `["integer","null"]` 数组）；nullable 用 `{ oneOf: [{ type: "integer" }, { type: "null" }] }`。
 3. **Node 24 的 `node:sqlite` 的 `DatabaseSync` 没有 `filename` 属性**——要报告库路径请在打开时自己保存。
 
+## 已知边界（Known Limitations）
+
+诚实声明当前版本的边界，避免预期错位：
+
+- **扫描版/图片版 PDF 暂不支持**：会明确报错提示（v0.4 规划 OCR）。只支持有文字层的 PDF。
+- **检索是关键词检索（BM25 + trigram），不是语义检索**：同义词、语义联想、概念推理做不到；对个人 / 中小体量知识库（数千块级）效果足够且结果可解释。语义检索（向量）在路线图中为可选项。
+- **定位为个人 / 团队知识库，不是海量文档系统**：短词兜底（LIKE）在文档量极大时（十万级块）检索会变慢。
+- **复杂表格提取有限**：PDF 表格数字可能混排，DOCX 表格转纯文本保留内容、丢失结构。
+- **依赖 DSH 生态**：DSH 仍是早期框架，API 可能存在破坏性变更；插件保持零 `@deepseek-ai/*` 运行时依赖以对冲兼容风险。
+
 ## 路线图
 
 - **v0.1（已完成）**：文档入库（PDF/MD/TXT/CSV/JSON）+ 检索 + 状态，页码级定位，中文双通道
