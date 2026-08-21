@@ -43,7 +43,7 @@ agent：→ doc_search query=现金流
 
 侧边栏底部「📚 知识库」按钮 → 抽屉：搜索 / 结果 / 拖拽上传 / 文档列表：
 
-![docintel 知识库面板](assets/screenshot-drawer.png)
+![docintel 知识库面板](https://raw.githubusercontent.com/LL-cmyk-so/dsh-docintel/main/assets/screenshot-drawer.png)
 
 拖文件进去即入库（自动去重/更新）；搜索框即查即得（带页码可复制引用）；文档按 PDF / 文本分组、可折叠、可过滤，每行 hover 出 🗑 两段式确认删除。
 
